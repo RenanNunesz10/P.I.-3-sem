@@ -1,0 +1,247 @@
+/* --- ESTILOS PARA A PÁGINA DA LOJA (HOME) --- */
+
+/* --- RESET E CONFIGURAÇÕES GLOBAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0B0D28;
+    color: #f0f0f0;
+    overflow-x: hidden;
+}
+
+/* --- CABEÇALHO --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #0B0D28;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    height: 30px;
+    width: auto;
+}
+
+.search-bar {
+    position: relative;
+    width: 400px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #2a2f42;
+    background-color: #0d111c;
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-bar i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6a6f83;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-right i {
+    font-size: 20px;
+    cursor: pointer;
+    color: #a0a4b8;
+}
+
+.header-right i.active {
+    color: #ff4769;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container principal da página da loja */
+.store-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Seção de Destaques (Grid Principal) */
+.featured-games {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.featured-main {
+    position: relative;
+    cursor: pointer;
+}
+
+.featured-main img,
+.side-game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.featured-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.side-game-card {
+    cursor: pointer;
+}
+
+/* Overlay de Preço no banner principal */
+.price-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(11, 13, 40, 0.8);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Ícone de Coração no banner principal */
+.heart-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #ff4769;
+    opacity: 0.8;
+}
+
+/* Paginação */
+.pagination-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #4b5563;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+/* Seção de Mais Populares */
+.popular-games h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.games-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px; /* Para a scrollbar não cortar a sombra */
+    /* Esconde a barra de rolagem */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+}
+.games-carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+.game-card {
+    flex: 0 0 250px; /* Impede que os cards encolham e define uma largura base */
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* --- RESPONSIVIDADE PARA A PÁGINA DA LOJA --- */
+@media (max-width: 992px) {
+    .featured-games {
+        grid-template-columns: 1fr; /* Transforma o grid em uma única coluna */
+    }
+
+    .game-card {
+        flex-basis: 200px; /* Diminui a largura base dos cards populares */
+    }
+}
+
+@media (max-width: 480px) {
+    .popular-games h2 {
+        font-size: 20px;
+    }
+
+    .game-card {
+        flex-basis: 150px; /* Diminui ainda mais os cards */
+    }
+
+    .price-overlay {
+        font-size: 14px;
+        padding: 8px 12px;
+        bottom: 15px;
+        left: 15px;
+    }
+}
