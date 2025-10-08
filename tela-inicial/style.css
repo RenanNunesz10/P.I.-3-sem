@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #0B0D28;
@@ -21,6 +25,8 @@ body {
     align-items: center;
     padding: 20px 50px;
     background-color: #0B0D28;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .header-left {
@@ -29,19 +35,31 @@ body {
     gap: 20px;
 }
 
+.header-left .fa-bars {
+    cursor: pointer;
+    font-size: 22px;
+}
+
 .logo {
     height: 30px;
     width: auto;
 }
 
+.header-center {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
 .search-bar {
     position: relative;
-    width: 400px;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
 }
 
 .search-bar input {
     width: 100%;
-    padding: 10px 15px;
+    padding: 10px 40px 10px 15px;
     border-radius: 8px;
     border: 1px solid #2a2f42;
     background-color: #0d111c;
@@ -93,7 +111,7 @@ body {
     align-items: center;
 }
 
-/* Container principal da página da loja */
+/* --- CONTEÚDO PRINCIPAL --- */
 .store-page {
     max-width: 1200px;
     margin: 0 auto;
@@ -131,7 +149,6 @@ body {
     cursor: pointer;
 }
 
-/* Overlay de Preço no banner principal */
 .price-overlay {
     position: absolute;
     bottom: 20px;
@@ -148,7 +165,6 @@ body {
     font-weight: 600;
 }
 
-/* Ícone de Coração no banner principal */
 .heart-icon {
     position: absolute;
     top: 20px;
@@ -171,13 +187,15 @@ body {
     height: 10px;
     border-radius: 50%;
     background-color: #4b5563;
+    cursor: pointer;
 }
 
 .dot.active {
     background-color: #fff;
 }
 
-/* Seção de Mais Populares */
+
+/* --- SEÇÃO MAIS POPULARES (AGORA EM GRID) --- */
 .popular-games h2 {
     font-size: 24px;
     font-weight: 600;
@@ -185,57 +203,270 @@ body {
 }
 
 .games-carousel {
-    display: flex;
+    display: grid;
+    /* A mágica da responsividade: cria colunas de no mínimo 240px 
+    e no máximo 1 fração do espaço (distribui igualmente). */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 15px; /* Para a scrollbar não cortar a sombra */
-    /* Esconde a barra de rolagem */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE */
 }
-.games-carousel::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
 
 .game-card {
-    flex: 0 0 250px; /* Impede que os cards encolham e define uma largura base */
-    border-radius: 15px;
+    background-color: #1A203E; /* Fundo do card */
+    border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: #f0f0f0;
+    display: flex; /* Para alinhar o conteúdo interno */
+    flex-direction: column; /* Conteúdo empilhado: imagem em cima, info embaixo */
+}
+
+.game-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .game-card img {
     width: 100%;
-    height: 100%;
+    height: 140px; /* Altura fixa para a imagem */
     object-fit: cover;
     display: block;
 }
 
-.game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+.game-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz esta div ocupar todo o espaço restante no card */
+}
+
+.game-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    line-height: 1.2;
+    min-height: 38px; /* Garante espaço para até 2 linhas de título */
+}
+
+.game-info .game-platform {
+    font-size: 0.8rem;
+    color: #a0a4b8;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empurra o preço para a base do card */
+}
+
+.price-info {
+    display: flex;
+    justify-content: flex-end; /* Alinha tags de preço à direita */
+    align-items: center;
+    gap: 10px;
+}
+
+.discount-tag {
+    background-color: #c53245;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.price-tag {
+    background-color: #035444;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
 }
 
 
-/* --- RESPONSIVIDADE PARA A PÁGINA DA LOJA --- */
-@media (max-width: 992px) {
+/* --- RODAPÉ --- */
+.main-footer {
+    background-color: #0B0D28;
+    color: #a0a4b8;
+    padding: 20px 0 30px 0;
+    margin-top: 5px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 50px 0 50px;
+    border-top: 1px solid #2a2f42;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-column h3 {
+    color: #f0f0f0;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: #d1d5db;
+    font-size: 28px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: text-decoration 0.3s ease;
+}
+
+.footer-column ul a:hover {
+    text-decoration: underline;
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: #2a2f42;
+    margin: 40px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    width: 60px;
+    height: auto;
+}
+
+.footer-legal {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #8a8f9d;
+}
+
+
+/* --- INÍCIO DAS REGRAS DE RESPONSIVIDADE --- */
+
+/* Telas de tablet e laptops pequenos (até 1024px) */
+@media (max-width: 1024px) {
+    .main-header {
+        padding: 20px 30px;
+    }
     .featured-games {
-        grid-template-columns: 1fr; /* Transforma o grid em uma única coluna */
+        grid-template-columns: 1fr;
     }
 
-    .game-card {
-        flex-basis: 200px; /* Diminui a largura base dos cards populares */
+    .featured-sidebar {
+        flex-direction: row;
     }
 }
 
+/* Telas de tablet em modo retrato e celulares grandes (até 768px) */
+@media (max-width: 768px) {
+    .main-header {
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+    
+    .header-center {
+        width: 100%;
+        order: 3;
+        margin-top: 15px;
+    }
+
+    .search-bar {
+        max-width: none;
+    }
+
+    .header-left {
+        flex-grow: 1;
+    }
+
+    .header-right {
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .header-left .fa-bars {
+        display: none;
+    }
+
+    .store-page {
+        padding: 30px 15px;
+    }
+
+    .popular-games h2 {
+        text-align: center;
+    }
+    
+    .footer-content {
+        padding: 30px 20px 0 20px;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Telas de celulares pequenos (até 480px) */
 @media (max-width: 480px) {
+    .logo {
+        height: 25px;
+    }
+    
+    /* Na grade, ajusta o tamanho mínimo para os cards não ficarem espremidos */
+    .games-carousel {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    
+    .game-info h3 {
+        font-size: 0.9rem;
+    }
+
     .popular-games h2 {
         font-size: 20px;
-    }
-
-    .game-card {
-        flex-basis: 150px; /* Diminui ainda mais os cards */
     }
 
     .price-overlay {
@@ -243,5 +474,9 @@ body {
         padding: 8px 12px;
         bottom: 15px;
         left: 15px;
+    }
+
+    .heart-icon {
+        font-size: 20px;
     }
 }

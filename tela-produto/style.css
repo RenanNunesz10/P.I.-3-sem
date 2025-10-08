@@ -27,6 +27,11 @@ body {
     gap: 20px;
 }
 
+.header-left .fa-bars {
+    cursor: pointer;
+    font-size: 22px;
+}
+
 .logo {
     height: 30px;
     width: auto;
